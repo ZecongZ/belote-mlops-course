@@ -1,0 +1,7 @@
+name: game_winner
+
+conda_env: setup.yaml
+
+entry_points:
+  main:
+    command: "python model_training.py"

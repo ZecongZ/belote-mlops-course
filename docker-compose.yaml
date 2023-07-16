@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  belote_testing:
+    image: belote_testing
+    container_name: belote_testing
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: docker/testing/Dockerfile
+    volumes:
+      - ./:/belote
+    stdin_open: true
+    tty: True
+    networks:
+      - backend
+  airflow:
+    image: airflow
+    container_name: airflow
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: docker/apache_airflow/Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./mlops:/belote/mlops
+      - ./airflow:/belote/airflow
+    stdin_open: true
+    tty: True
+    networks:
+      - backend
+volumes:
+  db:
+    driver: local
+networks:
+  backend:
+    name: backend
