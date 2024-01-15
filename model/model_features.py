@@ -164,6 +164,21 @@ def run_preprocessing_pipeline(
     return features_df
 
 
+
+# @timing
+# def multiprocessing_requests() -> pd.DataFrame:
+#     features_df = base_features_df.copy()
+#     with mp.Pool(5) as p: # set up a pool of 5 workers
+#         output = p.map(clean_feature, synthetic_game_data["raw_features"].values[0:SAMPLE]) # launch the cleaning
+#     features_df = pd.concat( # merge the placeholder with the clean features
+#         [features_df, pd.DataFrame(output)]
+#     )
+#     return features_df
+#
+# features_df = multiprocessing_requests()
+
+
+
 def run_processing_pipeline(
     custom_feature_builder: CustomFeaturesBuilder,
 ) -> pd.DataFrame:
